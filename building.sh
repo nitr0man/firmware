@@ -108,7 +108,7 @@ hi3516cv200() {
 
 hi3518ev200() {
   soc="hi3518ev200"
-  fresh && make PLATFORM=hisilicon BOARD=unknown_unknown_${soc}_openipc all && rename
+  fresh && make PLATFORM=hisilicon BOARD=unknown_unknown_${soc}_myopenipc all && rename
 }
 
 hi3518ev200_hs303v3() {
@@ -323,7 +323,7 @@ xm550() {
 # gk7202v300                   # testing..
 # gk7205v200                   # OpenIPC
 # gk7205v200_fpv               # FPV
-gk7205v200_ufanet            # Ufanet
+# gk7205v200_ufanet            # Ufanet
 # gk7205v300                   # OpenIPC
 # gk7605v100                   # testing..
 #
@@ -334,7 +334,7 @@ gk7205v200_ufanet            # Ufanet
 # hi3516cv200                   # testing..
 # hi3518ev200                   # testing..
 # hi3516cv200                   # testing..
-# hi3518ev200                   # testing..
+hi3518ev200                   # testing..
 # hi3518ev200_hs303v3             # testing..
 #
 # hi3516av100                   # OpenIPC
