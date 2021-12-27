@@ -39,3 +39,4 @@ include $(BR2_EXTERNAL_HISILICON_PATH)/package/rtl8188fu-openipc/rtl8188fu-openi
 include $(BR2_EXTERNAL_HISILICON_PATH)/package/uacme-openipc/uacme-openipc.mk
 include $(BR2_EXTERNAL_HISILICON_PATH)/package/vtund-openipc/vtund-openipc.mk
 include $(BR2_EXTERNAL_HISILICON_PATH)/package/yaml-cli/yaml-cli.mk
+include $(BR2_EXTERNAL_HISILICON_PATH)/package/bridge-vlan-ifscripts/bridge-vlan-ifscripts.mk

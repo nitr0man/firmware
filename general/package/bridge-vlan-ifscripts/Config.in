@@ -1,0 +1,10 @@
+config BR2_PACKAGE_BRIDGE_VLAN_IFSCRIPTS
+	bool "bridge-vlan-ifscripts"
+	depends on BR2_INIT_BUSYBOX
+	help
+	  Scripts set for handling vlan/bridge interfaces in Debian way
+
+	  Taken from Bering-uClibc https://sourceforge.net/projects/leaf/
+
+comment "init scripts needs a Busybox init to work"
+    depends on !BR2_LINUX_KERNEL
