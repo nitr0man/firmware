@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot -ga9be6b9-dirty Configuration
+# Buildroot -g8675a30 Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
 BR2_EXTERNAL_HISILICON_PATH="/var/testpoint/OpenIPCv2/br-ext-chip-hisilicon"
@@ -3455,3 +3455,4 @@ BR2_PACKAGE_UACME_OPENIPC=y
 #
 # BR2_PACKAGE_VTUND_OPENIPC is not set
 BR2_PACKAGE_YAML_CLI=y
+BR2_PACKAGE_BRIDGE_VLAN_IFSCRIPTS=y
