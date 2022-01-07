@@ -1,11 +1,11 @@
 #!/bin/bash
 #
-# OpenIPC.org | v.20211214
+# OpenIPC.org | v.20220102
 #
 
 clone() {
   sudo apt-get update -y ; apt-get install -y bc build-essential git unzip rsync autotools-dev automake libtool
-  git clone --depth=1 https://github.com/OpenIPC/openipc-2.1.git
+  git clone --depth=1 https://github.com/OpenIPC/firmware.git
 }
 
 fresh() {
@@ -18,6 +18,8 @@ fresh() {
 rename() {
   [[ $(stat --printf="%s" ./output/images/uImage) -gt 2097152 ]] && TG_NOTIFY="Warning: kernel size exceeded : $(stat --printf="%s" ./output/images/uImage) vs 2097152" && exit 1
   [[ $(stat --printf="%s" ./output/images/rootfs.squashfs) -gt 5242880 ]] && TG_NOTIFY="Warning: rootfs size exceeded - $(stat --printf="%s" ./output/images/rootfs.squashfs) vs 5242880" && exit 1
+  # If board have "_ultimate" as part...
+  #[[ $(stat --printf="%s" ./output/images/rootfs.squashfs) -gt 13107200 ]] && TG_NOTIFY="Warning: rootfs size exceeded - $(stat --printf="%s" ./output/images/rootfs.squashfs) vs 13107200" && exit 1
   #
   mv -v ./output/images/uImage ./output/images/uImage.${soc}
   mv -v ./output/images/rootfs.squashfs ./output/images/rootfs.squashfs.${soc}
@@ -40,7 +42,7 @@ rename_initramfs() {
 autoup_rootfs() {
   echo -e "\n\n"
   cp -v ./output/images/uImage.initramfs.${soc} ./output/images/autoupdate-kernel.img
-  ./output/host/bin/mkimage -A arm -O linux -T filesystem -n 'OpenIPC v2.1' -a 0x000000250000 -e 0x000000750000 -d ./output/images/rootfs.squashfs.${soc} ./output/images/autoupdate-rootfs.img
+  ./output/host/bin/mkimage -A arm -O linux -T filesystem -n 'OpenIPC firmware' -a 0x000000250000 -e 0x000000750000 -d ./output/images/rootfs.squashfs.${soc} ./output/images/autoupdate-rootfs.img
 }
 
 upload() {
@@ -114,6 +116,10 @@ hi3518ev200() {
 hi3518ev200_hs303v3() {
   soc="hi3518ev200"
   fresh && make PLATFORM=hisilicon BOARD=unknown_unknown_${soc}_openipc all && rename && autoup_rootfs
+  #PLATFORM=hisilicon  make br-linux-{dirclean,rebuild}
+  #PLATFORM=hisilicon  make br-hisilicon-osdrv-hi3516cv300-{dirclean,rebuild}
+  #PLATFORM=hisilicon  make br-majestic-hi3516cv300-{dirclean,rebuild}
+  #PLATFORM=hisilicon  make br-mbedtls-openipc-{dirclean,rebuild}
 }
 
 #################################################################################
@@ -121,10 +127,6 @@ hi3518ev200_hs303v3() {
 hi3516cv300() {
   soc="hi3516cv300"
   fresh && make PLATFORM=hisilicon BOARD=unknown_unknown_${soc}_openipc all && rename
-  #PLATFORM=hisilicon  make br-linux-{dirclean,rebuild}
-  #PLATFORM=hisilicon  make br-hisilicon-osdrv-hi3516cv300-{dirclean,rebuild}
-  #PLATFORM=hisilicon  make br-majestic-hi3516cv300-{dirclean,rebuild}
-  #PLATFORM=hisilicon  make br-mbedtls-openipc-{dirclean,rebuild}
 }
 
 hi3516ev100() {
@@ -136,10 +138,24 @@ hi3516av100() {
   soc="hi3516av100"
   fresh && make PLATFORM=hisilicon BOARD=unknown_unknown_${soc}_openipc all && rename
 }
+
 hi3516dv100() {
   soc="hi3516dv100"
   fresh && make PLATFORM=hisilicon BOARD=unknown_unknown_${soc}_openipc all && rename
 }
+
+#################################################################################
+
+hi3519v101() {
+  soc="hi3519v101"
+  fresh && make PLATFORM=hisilicon BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+hi3516av200() {
+  soc="hi3516av200"
+  fresh && make PLATFORM=hisilicon BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
 #################################################################################
 
 hi3516cv500() {
@@ -197,6 +213,11 @@ hi3516ev300_glibc() {
 hi3516ev300_tehshield() {
   soc="hi3516ev300"
   fresh && make PLATFORM=hisilicon BOARD=unknown_unknown_${soc}_tehshield all && rename
+}
+
+hi3516ev300_ultimate() {
+  soc="hi3516ev300"
+  fresh && make PLATFORM=hisilicon BOARD=unknown_unknown_${soc}_ultimate all && rename
 }
 
 hi3518ev300() {
@@ -339,8 +360,9 @@ hi3518ev200                   # testing..
 #
 # hi3516av100                   # OpenIPC
 # hi3516dv100                   # OpenIPC
-# hi3516cv300                   # testing..
-# hi3516ev100                   # testing..
+#
+# hi3516cv300                   # OpenIPC
+# hi3516ev100                   # OpenIPC
 #
 # hi3516dv200                   # OpenIPC
 # hi3516ev200                   # OpenIPC
@@ -351,7 +373,11 @@ hi3518ev200                   # testing..
 # hi3516ev300_dev               # OpenIPC development
 # hi3516ev300_glibc             # testing..
 # hi3516ev300_tehshield         # Tehshield
+# hi3516ev300_ultimate          # OpenIPC_ultimate version
 # hi3518ev300                   # OpenIPC
+#
+# hi3519v101                    # OpenIPC
+# hi3516av200                   # OpenIPC
 #
 # hi3516av300                   # testing..
 # hi3516cv500                   # testing..
@@ -361,8 +387,7 @@ hi3518ev200                   # testing..
 #
 #######
 #
-# nt98562                       # OpenIPC
-#
+nt98562                       # OpenIPC
 # nt98566                       # OpenIPC
 #
 #######
@@ -393,5 +418,5 @@ hi3518ev200                   # testing..
 #
 #
 #
-# More examples see here: https://github.com/OpenIPC/openipc-2.1/wiki/source_code
+# More examples see here: https://github.com/OpenIPC/firmware/wiki/source_code
 #
