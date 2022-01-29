@@ -11,10 +11,10 @@ chipid=$(ipcinfo --chip_id)
 # MMZ config
 mem_start=0x80000000;                             # phy mem start
 
-mem_total=$(awk -F '=' '$1=="totalmem"{print $2}' RS=" " /proc/cmdline | tr -d 'M')
+mem_total=$(fw_printenv -n totalmem | tr -d 'M')
 mem_total=${mem_total:=64}
 
-os_mem_size=$(awk -F '=' '$1=="mem"{print $2}' RS=" " /proc/cmdline | tr -d 'M')
+os_mem_size=$(fw_printenv -n osmem | tr -d 'M')
 os_mem_size=${os_mem_size:=32}
 
 report_error()
@@ -40,7 +40,6 @@ insert_detect()
         insmod sensor_i2c.ko
         insmod sensor_spi.ko
         SENSOR=ar0130 insert_sns
-        ipcinfo -s
 }
 
 remove_detect()
@@ -176,11 +175,13 @@ insert_ko()
         insert_audio
 
         insmod hi_mipi.ko
+        #insmod wdt.ko
         echo "==== Your input Sensor type is $SENSOR ===="
 }
 
 remove_ko()
 {
+        rmmod wdt
         rmmod sys_config.ko
         remove_audio
         remove_sns
@@ -342,7 +343,7 @@ else
                 logger -s -p daemon.info -t hisilicon "Get data from environment and set SENSOR as ${SENSOR}"
         else
                 insert_detect
-                SENSOR_DETECT=$(ipcinfo -s)
+                SENSOR_DETECT=$(ipcinfo --short-sensor)
                 export SENSOR=${SENSOR_DETECT:=unknown}
                 remove_detect
                 logger -s -p daemon.info -t hisilicon "Get data from ipcinfo and set SENSOR as ${SENSOR}"

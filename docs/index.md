@@ -9,7 +9,7 @@ Historically, OpenIPC firmware supports SoC manufactured by HiSilicon, but as th
 the list of supported processors expands. Today, it also includes chips from Goke, SigmaStar, Xiongmai,
 and is expected to grow further.
 
-More information about the project is available [in our wiki](https://github.com/OpenIPC/firmware/wiki)
+More information about the project is available [in our wiki](https://github.com/OpenIPC/wiki)
 and [on the website](https://openipc.org/).
 
 ### Current development status <a href="#commercial">*</a>
@@ -33,11 +33,12 @@ _NB! Downloads are for research only, without any guarantee._
 | Goke&nbsp;GK7102S<br>![GK7102S][GK7102S]                  |        |        |        |     |      |     |      |                    | R&D    |
 | Goke&nbsp;GK7202v300<br>![GK7202v300][GK7202v300]         |        |        |        |     |      |     |      | [⬇][fwGK7202v300]  | WIP    |
 | Goke&nbsp;GK7205v200<br>![GK7205v200][GK7205v200]         |   +    |   +    |   +    |  +  |  +   |     |      | [⬇][fwGK7205v200]  | DONE   |
-| Goke&nbsp;GK7205v300<br>![GK7205v300][GK7205v300]         |        |        |        |     |      |     |      | [⬇][fwGK7205v300]  | DONE   |
+| Goke&nbsp;GK7205v300<br>![GK7205v300][GK7205v300]         |   +    |   +    |   +    |  +  |  +   |     |      | [⬇][fwGK7205v300]  | DONE   |
 | Goke&nbsp;GK7605v100<br>![GK7605v100][GK7605v100]         |   +    |   +    |   +    |     |      |     |      | [⬇][fwGK7605v100]  | WIP    |
 | HiSilicon&nbsp;Hi3516Av100<br>![Hi3516Av100][Hi3516Av100] |        |   +    |   +    |     |      |     |      | [⬇][fwHi3516Av100] | WIP    |
 | HiSilicon&nbsp;Hi3516Av200<br>![Hi3516Av200][Hi3516Av200] |        |   +    |   +    |     |      |     |      | [⬇][fwHi3516Av200] | WIP    |
 | HiSilicon&nbsp;Hi3516Av300<br>![Hi3516Av300][Hi3516Av300] |        |   +    |   +    |     |      |     |      | [⬇][fwHi3516Av300] | WIP    |
+| HiSilicon&nbsp;Hi3516Cv100<br>![Hi3516Cv100][Hi3516Cv100] |        |   +    |   +    |  +  |      |     |      | [⬇][fwHi3516Cv100] | WIP    |
 | HiSilicon&nbsp;Hi3516Cv200<br>![Hi3516Cv200][Hi3516Cv200] |        |   +    |   +    |  +  |  +   |  +  |      | [⬇][fwHi3516Cv200] | DONE   |
 | HiSilicon&nbsp;Hi3516Cv300<br>![Hi3516Cv300][Hi3516Cv300] |   +    |   +    |   +    |  +  |  +   |  +  |  +   | [⬇][fwHi3516Cv300] | DONE   |
 | HiSilicon&nbsp;Hi3516Cv500<br>![Hi3516Cv500][Hi3516Cv500] |        |   +    |   +    |     |      |     |      | [⬇][fwHi3516Cv500] | WIP    |
@@ -47,6 +48,8 @@ _NB! Downloads are for research only, without any guarantee._
 | HiSilicon&nbsp;Hi3516Ev100<br>![Hi3516Ev100][Hi3516Ev100] |   +    |   +    |   +    |  +  |  +   |  +  |  +   | [⬇][fwHi3516Ev100] | DONE   |
 | HiSilicon&nbsp;Hi3516Ev200<br>![Hi3516Ev200][Hi3516Ev200] |   +    |   +    |   +    |  +  |  +   |  +  |  +   | [⬇][fwHi3516Ev200] | DONE   |
 | HiSilicon&nbsp;Hi3516Ev300<br>![Hi3516Ev300][Hi3516Ev300] |   +    |   +    |   +    |  +  |  +   |  +  |  +   | [⬇][fwHi3516Ev300] | DONE   |
+| HiSilicon&nbsp;Hi3518Cv100<br>![Hi3518Cv100][Hi3518Cv100] |        |   +    |   +    |  +  |      |     |      | [⬇][fwHi3518Cv100] | WIP    |
+| HiSilicon&nbsp;Hi3518Ev100<br>![Hi3518Ev100][Hi3518Ev100] |        |   +    |   +    |  +  |      |     |      | [⬇][fwHi3518Ev100] | WIP    |
 | HiSilicon&nbsp;Hi3518Ev200<br>![Hi3518Ev200][Hi3518Ev200] |        |   +    |   +    |  +  |  +   |  +  |      | [⬇][fwHi3518Ev200] | DONE   |
 | HiSilicon&nbsp;Hi3518Ev300<br>![Hi3518Ev300][Hi3518Ev300] |   +    |   +    |   +    |  +  |  +   |  +  |  +   | [⬇][fwHi3518Ev300] | DONE   |
 | HiSilicon&nbsp;Hi3519v101<br>![Hi3519v101][Hi3519v101]    |        |   +    |   +    |     |      |     |      | [⬇][fwHi3519v101]  | WIP    |
@@ -118,6 +121,7 @@ Thank you.
 [Hi3516Av100]: https://github.com/OpenIPC/firmware/actions/workflows/hi3516av100_images.yml/badge.svg
 [Hi3516Av200]: https://github.com/OpenIPC/firmware/actions/workflows/hi3516av200_images.yml/badge.svg
 [Hi3516Av300]: https://github.com/OpenIPC/firmware/actions/workflows/hi3516av300_images.yml/badge.svg
+[Hi3516Cv100]: https://github.com/OpenIPC/firmware/actions/workflows/hi3516cv100_images.yml/badge.svg
 [Hi3516Cv200]: https://github.com/OpenIPC/firmware/actions/workflows/hi3516cv200_images.yml/badge.svg
 [Hi3516Cv300]: https://github.com/OpenIPC/firmware/actions/workflows/hi3516cv300_images.yml/badge.svg
 [Hi3516Cv500]: https://github.com/OpenIPC/firmware/actions/workflows/hi3516cv500_images.yml/badge.svg
@@ -127,6 +131,8 @@ Thank you.
 [Hi3516Ev100]: https://github.com/OpenIPC/firmware/actions/workflows/hi3516ev100_images.yml/badge.svg
 [Hi3516Ev200]: https://github.com/OpenIPC/firmware/actions/workflows/hi3516ev200_images.yml/badge.svg
 [Hi3516Ev300]: https://github.com/OpenIPC/firmware/actions/workflows/hi3516ev300_images.yml/badge.svg
+[Hi3518Cv100]: https://github.com/OpenIPC/firmware/actions/workflows/hi3518cv100_images.yml/badge.svg
+[Hi3518Ev100]: https://github.com/OpenIPC/firmware/actions/workflows/hi3518ev100_images.yml/badge.svg
 [Hi3518Ev200]: https://github.com/OpenIPC/firmware/actions/workflows/hi3518ev200_images.yml/badge.svg
 [Hi3518Ev300]: https://github.com/OpenIPC/firmware/actions/workflows/hi3518ev300_images.yml/badge.svg
 [Hi3519v101]: https://github.com/OpenIPC/firmware/actions/workflows/hi3519v101_images.yml/badge.svg
@@ -153,6 +159,7 @@ Thank you.
 [fwHi3516Av100]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.hi3516av100-br.tgz
 [fwHi3516Av200]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.hi3516av200-br.tgz
 [fwHi3516Av300]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.hi3516av300-br.tgz
+[fwHi3516Cv100]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.hi3516cv100-br.tgz
 [fwHi3516Cv200]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.hi3516cv200-br.tgz
 [fwHi3516Cv300]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.hi3516cv300-br.tgz
 [fwHi3516Cv500]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.hi3516cv500-br.tgz
@@ -162,6 +169,8 @@ Thank you.
 [fwHi3516Ev100]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.hi3516ev100-br.tgz
 [fwHi3516Ev200]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.hi3516ev200-br.tgz
 [fwHi3516Ev300]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.hi3516ev300-br.tgz
+[fwHi3518Cv100]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.hi3518cv100-br.tgz
+[fwHi3518Ev100]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.hi3518ev100-br.tgz
 [fwHi3518Ev200]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.hi3518ev200-br.tgz
 [fwHi3518Ev300]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.hi3518ev300-br.tgz
 [fwHi3519v101]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.hi3519v101-br.tgz
