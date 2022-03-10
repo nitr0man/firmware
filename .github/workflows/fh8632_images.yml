@@ -1,6 +1,11 @@
 name: "FH8632  "
 
 on:
+  push:
+    branches:
+      - production
+    tags:
+      - "v*"
   workflow_dispatch:
 
 jobs:

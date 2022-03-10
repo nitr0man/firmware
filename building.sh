@@ -1,7 +1,12 @@
 #!/bin/bash
 #
-# OpenIPC.org | v.20220102
+# OpenIPC.org | v.20220224
 #
+
+MAX_KERNEL_SIZE=0x200000               #    2MiB,  2097152
+MAX_KERNEL_SIZE_EXPERIMENTAL=0x3E8480  # ~3.9MiB,  4097152
+MAX_ROOTFS_SIZE=0x500000               #    5MiB,  5242880
+MAX_KERNEL_SIZE_ULTIMATE=0xC80000      # 12,5MiB, 13107200
 
 clone() {
   sudo apt-get update -y ; apt-get install -y bc build-essential git unzip rsync autotools-dev automake libtool
@@ -15,12 +20,21 @@ fresh() {
   [ -d buildroot* ] && echo -e "\nBuildroot found, OK\n" || make prepare
 }
 
+should_fit() {
+  filename=$1
+  maxsize=$2
+  filesize=$(stat --printf="%s" ./output/images/$filename)
+  if [[ $filesize -gt $maxsize ]]; then
+    export TG_NOTIFY="Warning: $filename is too large: $filesize vs $maxsize"
+    exit 1
+  fi
+}
+
 rename() {
-  [[ $(stat --printf="%s" ./output/images/uImage) -gt 2097152 ]] && TG_NOTIFY="Warning: kernel size exceeded : $(stat --printf="%s" ./output/images/uImage) vs 2097152" && exit 1
-  [[ $(stat --printf="%s" ./output/images/rootfs.squashfs) -gt 5242880 ]] && TG_NOTIFY="Warning: rootfs size exceeded - $(stat --printf="%s" ./output/images/rootfs.squashfs) vs 5242880" && exit 1
+  should_fit uImage $MAX_KERNEL_SIZE
+  should_fit rootfs.squashfs $MAX_ROOTFS_SIZE
   # If board have "_ultimate" as part...
-  #[[ $(stat --printf="%s" ./output/images/rootfs.squashfs) -gt 13107200 ]] && TG_NOTIFY="Warning: rootfs size exceeded - $(stat --printf="%s" ./output/images/rootfs.squashfs) vs 13107200" && exit 1
-  #
+  # should_fit rootfs.squashfs $MAX_ROOTFS_SIZE_ULTIMATE
   mv -v ./output/images/uImage ./output/images/uImage.${soc}
   mv -v ./output/images/rootfs.squashfs ./output/images/rootfs.squashfs.${soc}
   mv -v ./output/images/rootfs.cpio ./output/images/rootfs.${soc}.cpio
@@ -30,8 +44,7 @@ rename() {
 }
 
 rename_initramfs() {
-  [[ $(stat --printf="%s" ./output/images/uImage) -gt 4097152 ]] && TG_NOTIFY="Warning: kernel size exceeded : $(stat --printf="%s" ./output/images/uImage) vs 2097152" && exit 1
-  #
+  should_fit uImage $MAX_KERNEL_SIZE_EXPERIMENTAL
   mv -v ./output/images/uImage ./output/images/uImage.initramfs.${soc}
   mv -v ./output/images/rootfs.cpio ./output/images/rootfs.${soc}.cpio
   mv -v ./output/images/rootfs.tar ./output/images/rootfs.${soc}.tar
@@ -60,13 +73,62 @@ sdk() {
 
 #################################################################################
 
-fh8852() {
-  soc="fh8852"
+ambarella-s3l() {
+  soc="s3l"
+  fresh && make PLATFORM=ambarella BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+#################################################################################
+
+ak3918ev200() {
+  soc="ak3918ev200"
+  fresh && make PLATFORM=anyka BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+#################################################################################
+
+fh8833v100() {
+  soc="fh8833v100"
   fresh && make PLATFORM=fullhan BOARD=unknown_unknown_${soc}_openipc all && rename
 }
 
-fh8856() {
-  soc="fh8856"
+fh8852v100() {
+  soc="fh8852v100"
+  fresh && make PLATFORM=fullhan BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+fh8852v200() {
+  soc="fh8852v200"
+  fresh && make PLATFORM=fullhan BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+fh8852v210() {
+  soc="fh8852v210"
+  fresh && make PLATFORM=fullhan BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+fh8856v100() {
+  soc="fh8856v100"
+  fresh && make PLATFORM=fullhan BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+fh8856v200() {
+  soc="fh8856v200"
+  fresh && make PLATFORM=fullhan BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+fh8856v210() {
+  soc="fh8856v210"
+  fresh && make PLATFORM=fullhan BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+fh8858v200() {
+  soc="fh8858v200"
+  fresh && make PLATFORM=fullhan BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+fh8858v210() {
+  soc="fh8858v210"
   fresh && make PLATFORM=fullhan BOARD=unknown_unknown_${soc}_openipc all && rename
 }
 
@@ -92,6 +154,23 @@ gk7205v300() {
   fresh && make PLATFORM=goke BOARD=unknown_unknown_${soc}_openipc all && rename
 }
 
+gk7205v300_fpv() {
+  soc="gk7205v300"
+  fresh && make PLATFORM=goke BOARD=unknown_unknown_${soc}_fpv all && rename
+}
+
+#################################################################################
+
+gm8135() {
+  soc="gm8135"
+  fresh && make PLATFORM=grainmedia BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+gm8136() {
+  soc="gm8136"
+  fresh && make PLATFORM=grainmedia BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
 #################################################################################
 
 hi3516cv100() {
@@ -107,6 +186,11 @@ hi3516cv200() {
 hi3518ev200() {
   soc="hi3518ev200"
   fresh && make PLATFORM=hisilicon BOARD=unknown_unknown_${soc}_myopenipc all && rename
+}
+
+hi3518ev200_domsip() {
+  soc="hi3518ev200"
+  fresh && make PLATFORM=hisilicon BOARD=unknown_unknown_${soc}_domsip all && rename
 }
 
 hi3518ev200_hs303v1() {
@@ -248,6 +332,13 @@ hi3536dv100() {
 
 #################################################################################
 
+ingenic-t31() {
+  soc="t31"
+  fresh && make PLATFORM=ingenic BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+#################################################################################
+
 nt98562() {
   soc="nt98562"
   fresh && make PLATFORM=novatek BOARD=unknown_unknown_${soc}_openipc all && rename
@@ -344,31 +435,54 @@ xm550() {
 
 #################################################################################
 
+#################################################################################
 
 # Build firmware
+#######
 #
-# fh8852                        # testing..
-# fh8856                        # testing..
+# ambarella-s3l                   # testing..
 #
 #######
 #
-# gk7202v300                   # testing..
-# gk7205v200                   # OpenIPC
-# gk7205v200_fpv               # FPV
-# gk7205v200_ufanet            # Ufanet
-# gk7205v300                   # OpenIPC
-# gk7605v100                   # testing..
+# ak3918ev200                   # testing..
+#
+#######
+#
+# fh8833v100                    # testing..
+# fh8852v100                    # testing..
+# fh8852v200                    # testing..
+# fh8852v210                    # testing..
+# fh8856v100                    # testing..
+# fh8856v200                    # testing..
+# fh8856v210                    # testing..
+# fh8858v200                    # testing..
+# fh8858v210                    # testing..
+#
+#######
+#
+# gm8135                        # testing..
+# gm8136                        # testing..
+#
+#######
+#
+# gk7202v300                    # testing..
+# gk7205v200                    # OpenIPC
+# gk7205v200_fpv                # FPV
+# gk7205v200_ufanet             # Ufanet
+# gk7205v300                    # OpenIPC
+# gk7205v300_fpv                # FPV
+# gk7605v100                    # testing..
 #
 #######
 #
 # hi3516cv100                   # OpenIPC
 #
 # hi3516cv200                   # testing..
-# hi3518ev200                   # testing..
 # hi3516cv200                   # testing..
 hi3518ev200                   # testing..
+# hi3518ev200_domsip            # DomSip
 # hi3518ev200_hs303v1           # OpenIPC
-# hi3518ev200_hs303v2           # OpenIPC
+#hi3518ev200_hs303v2           # OpenIPC
 # hi3518ev200_hs303v3           # OpenIPC
 #
 # hi3516av100                   # OpenIPC
@@ -397,6 +511,10 @@ hi3518ev200                   # testing..
 # hi3516dv300                   # testing..
 #
 # hi3536dv100                   # OpenIPC
+#
+#######
+#
+#ingenic-t31                       # testing..
 #
 #######
 #
@@ -429,7 +547,7 @@ hi3518ev200                   # testing..
 # xm530                         # OK
 # xm550                         # OK
 #
+#######
 #
-#
-# More examples see here: https://github.com/OpenIPC/firmware/wiki/source_code
+# More examples see here: https://openipc.github.io/wiki/
 #
