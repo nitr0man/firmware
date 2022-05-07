@@ -7,7 +7,7 @@ OpenIPC is a rapidly developing open source alternative firmware for popular IP 
 
 Historically, OpenIPC firmware supports SoC manufactured by HiSilicon, but as the development continues,
 the list of supported processors expands. Today, it also includes chips from Ambarella, Anyka, Fullhan,
-Goke, GrainMedia, MStar, Novatek, SigmaStar, XiongMai and is expected to grow further.
+Goke, GrainMedia, Ingenic, MStar, Novatek, SigmaStar, XiongMai and is expected to grow further.
 
 More information about the project is available [in our wiki](https://github.com/OpenIPC/wiki)
 and [on the website](https://openipc.org/).
@@ -29,7 +29,7 @@ _NB! Downloads are for research only, without any guarantee._
 | SoC                                                       | U-Boot | Kernel | Rootfs | USB | WiFi | MMC | IPv6 |        D/L         | Status |
 |-----------------------------------------------------------|:------:|:------:|:------:|:---:|:----:|:---:|:----:|:------------------:|--------|
 | Ambarella&nbsp;S2L<br>![AmbaS2L][AmbaS2L]                 |        |        |        |     |      |     |      |                    | R&D    |
-| Ambarella&nbsp;S3L<br>![AmbaS3L][AmbaS3L]                 |        |        |        |     |      |     |      |                    | R&D    |
+| Ambarella&nbsp;S3L<br>![AmbaS3L][AmbaS3L]                 |        |   +    |   +    |     |      |     |      |                    | WIP    |
 | Anyka&nbsp;AK3916Ev301<br>![AK3916Ev301][AK3916Ev301]     |        |        |        |     |      |     |      |                    | R&D    |
 | Anyka&nbsp;AK3918Ev200<br>![AK3918Ev200][AK3918Ev200]     |        |   +    |   +    |     |      |     |      | [⬇][fwAK3918Ev200] | WIP    |
 | Fullhan&nbsp;FH8632<br>![FH8632][FH8632]                  |        |        |        |     |      |     |      |                    | R&D    |
@@ -69,18 +69,18 @@ _NB! Downloads are for research only, without any guarantee._
 | Ingenic&nbsp;T10<br>![T10][T10]                           |        |        |        |     |      |     |      |                    | R&D    |
 | Ingenic&nbsp;T20<br>![T20][T20]                           |        |        |        |     |      |     |      |                    | R&D    |
 | Ingenic&nbsp;T21<br>![T21][T21]                           |        |        |        |     |      |     |      |                    | R&D    |
-| Ingenic&nbsp;T31<br>![T31][T31]                           |        |        |        |     |      |     |      |                    | R&D    |
+| Ingenic&nbsp;T31<br>![T31][T31]                           |        |   +    |   +    |     |      |     |      | [⬇][fwT31]         | WIP    |
 | MStar&nbsp;MSC313E<br>![MSC313E][MSC313E]                 |        |        |        |     |      |     |      |                    | R&D    |
 | MStar&nbsp;MSC316D<br>![MSC316D][MSC316D]                 |        |        |        |     |      |     |      |                    | R&D    |
-| Novatek&nbsp;NT98562<br>![NT98562][NT98562]               |        |   +    |   +    |     |      |     |      |   [⬇][fwNT98562]   | WIP    |
-| Novatek&nbsp;NT98566<br>![NT98566][NT98566]               |        |   +    |   +    |     |      |     |      |   [⬇][fwNT98566]   | WIP    |
-| SigmaStar&nbsp;SSC325<br>![SSC325][SSC325]                |        |   +    |   +    |     |      |     |      |   [⬇][fwSSC325]    | WIP    |
-| SigmaStar&nbsp;SSC335<br>![SSC335][SSC335]                |        |   +    |   +    |  +  |      |  +  |      |   [⬇][fwSSC335]    | MVP    |
-| SigmaStar&nbsp;SSC337<br>![SSC337][SSC337]                |        |   +    |   +    |  +  |      |  +  |      |   [⬇][fwSSC337]    | MVP    |
-| SigmaStar&nbsp;SSC337DE<br>![SSC337DE][SSC337DE]          |        |   +    |   +    |     |      |     |      |  [⬇][fwSSC337DE]   | TEST   |
-| Xiongmai&nbsp;XM510<br>![XM510][XM510]                    |        |   +    |   +    |     |      |     |      |    [⬇][fwXM510]    | MVP    |
-| Xiongmai&nbsp;XM530<br>![XM530][XM530]                    |        |   +    |   +    |     |      |     |      |    [⬇][fwXM530]    | MVP    |
-| Xiongmai&nbsp;XM550<br>![XM550][XM550]                    |        |   +    |   +    |     |      |     |      |    [⬇][fwXM550]    | MVP    |
+| Novatek&nbsp;NT98562<br>![NT98562][NT98562]               |        |   +    |   +    |     |      |     |      | [⬇][fwNT98562]     | WIP    |
+| Novatek&nbsp;NT98566<br>![NT98566][NT98566]               |        |   +    |   +    |     |      |     |      | [⬇][fwNT98566]     | WIP    |
+| SigmaStar&nbsp;SSC325<br>![SSC325][SSC325]                |        |   +    |   +    |     |      |     |      | [⬇][fwSSC325]      | WIP    |
+| SigmaStar&nbsp;SSC335<br>![SSC335][SSC335]                |        |   +    |   +    |  +  |      |  +  |      | [⬇][fwSSC335]      | MVP    |
+| SigmaStar&nbsp;SSC337<br>![SSC337][SSC337]                |        |   +    |   +    |  +  |      |  +  |      | [⬇][fwSSC337]      | MVP    |
+| SigmaStar&nbsp;SSC337DE<br>![SSC337DE][SSC337DE]          |        |   +    |   +    |     |      |     |      | [⬇][fwSSC337DE]    | TEST   |
+| Xiongmai&nbsp;XM510<br>![XM510][XM510]                    |        |   +    |   +    |     |      |     |      | [⬇][fwXM510]       | MVP    |
+| Xiongmai&nbsp;XM530<br>![XM530][XM530]                    |        |   +    |   +    |     |      |     |      | [⬇][fwXM530]       | MVP    |
+| Xiongmai&nbsp;XM550<br>![XM550][XM550]                    |        |   +    |   +    |     |      |     |      | [⬇][fwXM550]       | MVP    |
 
 -----
 
@@ -168,7 +168,7 @@ Thank you.
 [T10]: https://img.shields.io/static/v1?label=T10&message=help%20needed&color=5500ff&logo=github
 [T20]: https://img.shields.io/static/v1?label=T20&message=help%20needed&color=5500ff&logo=github
 [T21]: https://img.shields.io/static/v1?label=T21&message=help%20needed&color=5500ff&logo=github
-[T31]: https://img.shields.io/static/v1?label=T31&message=help%20needed&color=5500ff&logo=github
+[T31]: https://github.com/OpenIPC/firmware/actions/workflows/t31_images.yml/badge.svg
 [XM510]: https://github.com/OpenIPC/firmware/actions/workflows/xm510_images.yml/badge.svg
 [XM530]: https://github.com/OpenIPC/firmware/actions/workflows/xm530_images.yml/badge.svg
 [XM550]: https://github.com/OpenIPC/firmware/actions/workflows/xm550_images.yml/badge.svg
@@ -202,6 +202,7 @@ Thank you.
 [fwHi3518Ev200]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.hi3518ev200-br.tgz
 [fwHi3518Ev300]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.hi3518ev300-br.tgz
 [fwHi3519v101]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.hi3519v101-br.tgz
+[fwT31]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.t31-br.tgz
 [fwNT98562]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.nt98562-br.tgz
 [fwNT98566]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.nt98566-br.tgz
 [fwSSC325]: https://github.com/OpenIPC/firmware/releases/download/latest/openipc.ssc325-br.tgz

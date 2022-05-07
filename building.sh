@@ -15,9 +15,10 @@ clone() {
 
 fresh() {
   date >/tmp/openipc_buildtime.txt
-  [ -d buildroot-2020.02.12/dl ] && mkdir -p /tmp/buildroot_dl ; cp -rv buildroot-2020.02.12/dl/* /tmp/buildroot_dl
+  [ -d buildroot-2020.02.12/dl ] && mv buildroot-2020.02.12/dl .
   make distclean #clean
   [ -d buildroot* ] && echo -e "\nBuildroot found, OK\n" || make prepare
+  [ -d dl ] && mv dl buildroot-2020.02.12/dl || return 0
 }
 
 should_fit() {
@@ -134,6 +135,26 @@ fh8858v210() {
 
 #################################################################################
 
+gk7101() {
+  soc="gk7101"
+  fresh && make PLATFORM=goke BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+gk7101s() {
+  soc="gk7101s"
+  fresh && make PLATFORM=goke BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+gk7102() {
+  soc="gk7102"
+  fresh && make PLATFORM=goke BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+gk7102s() {
+  soc="gk7102s"
+  fresh && make PLATFORM=goke BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
 gk7205v200() {
   soc="gk7205v200"
   fresh && make PLATFORM=goke BOARD=unknown_unknown_${soc}_openipc all && rename
@@ -142,6 +163,11 @@ gk7205v200() {
 gk7205v200_fpv() {
   soc="gk7205v200"
   fresh && make PLATFORM=goke BOARD=unknown_unknown_${soc}_fpv all && rename
+}
+
+gk7205v200_iscom() {
+  soc="gk7205v200"
+  fresh && make PLATFORM=goke BOARD=unknown_unknown_${soc}_iscom all && rename
 }
 
 gk7205v200_ufanet() {
@@ -332,7 +358,7 @@ hi3536dv100() {
 
 #################################################################################
 
-ingenic-t31() {
+t31() {
   soc="t31"
   fresh && make PLATFORM=ingenic BOARD=unknown_unknown_${soc}_openipc all && rename
 }
@@ -348,6 +374,13 @@ nt98562() {
 nt98566() {
   soc="nt98566"
   fresh && make PLATFORM=novatek BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+#################################################################################
+
+msc313e() {
+  soc="msc313e"
+  fresh && make PLATFORM=sigmastar BOARD=unknown_unknown_${soc}_openipc all && rename
 }
 
 #################################################################################
@@ -404,6 +437,11 @@ ssc337() {
   fresh && make PLATFORM=sigmastar BOARD=unknown_unknown_${soc}_openipc all && rename
 }
 
+ssc337_kama() {
+  soc="ssc337"
+  fresh && make PLATFORM=sigmastar BOARD=unknown_unknown_${soc}_kama all && rename
+}
+
 #################################################################################
 
 ssc335de() {
@@ -414,6 +452,28 @@ ssc335de() {
 ssc337de() {
   soc="ssc337de"
   fresh && make PLATFORM=sigmastar BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+#################################################################################
+
+t10() {
+  soc="t10"
+  fresh && make PLATFORM=ingenic BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+t20() {
+  soc="t20"
+  fresh && make PLATFORM=ingenic BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+t30() {
+  soc="t30"
+  fresh && make PLATFORM=ingenic BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+t31() {
+  soc="t31"
+  fresh && make PLATFORM=ingenic BOARD=unknown_unknown_${soc}_openipc all && rename
 }
 
 #################################################################################
@@ -465,9 +525,17 @@ xm550() {
 #
 #######
 #
+# gk7101                        # testing..
+# gk7101s                       # testing..
+# gk7102                        # testing..
+# gk7102s                       # testing..
+#
+#######
+#
 # gk7202v300                    # testing..
 # gk7205v200                    # OpenIPC
 # gk7205v200_fpv                # FPV
+# gk7205v200_iscom              # Iscom test
 # gk7205v200_ufanet             # Ufanet
 # gk7205v300                    # OpenIPC
 # gk7205v300_fpv                # FPV
@@ -478,11 +546,12 @@ xm550() {
 # hi3516cv100                   # OpenIPC
 #
 # hi3516cv200                   # testing..
+# hi3518ev200                   # testing..
 # hi3516cv200                   # testing..
 hi3518ev200                   # testing..
 # hi3518ev200_domsip            # DomSip
 # hi3518ev200_hs303v1           # OpenIPC
-#hi3518ev200_hs303v2           # OpenIPC
+# hi3518ev200_hs303v2           # OpenIPC
 # hi3518ev200_hs303v3           # OpenIPC
 #
 # hi3516av100                   # OpenIPC
@@ -514,14 +583,19 @@ hi3518ev200                   # testing..
 #
 #######
 #
+<<<<<<< HEAD
 #ingenic-t31                       # testing..
 #
 #######
 #
+=======
+>>>>>>> orig/master
 # nt98562                       # OpenIPC
 # nt98566                       # OpenIPC
 #
 #######
+#
+# msc313e                       # OpenIPC
 #
 # ssc325                        # OpenIPC
 #
@@ -538,8 +612,16 @@ hi3518ev200                   # testing..
 # ssc335de                      # OpenIPC
 #
 # ssc337                        # OpenIPC => musl
+# ssc337_kama                   # uClibc
 #
 # ssc337de                      # OpenIPC
+#
+#######
+#
+# t10                           # testing..
+# t20                           # testing..
+# t30                           # testing..
+# t31                           # testing..
 #
 #######
 #
