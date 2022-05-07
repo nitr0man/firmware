@@ -583,13 +583,10 @@ hi3518ev200                   # testing..
 #
 #######
 #
-<<<<<<< HEAD
 #ingenic-t31                       # testing..
 #
 #######
 #
-=======
->>>>>>> orig/master
 # nt98562                       # OpenIPC
 # nt98566                       # OpenIPC
 #
