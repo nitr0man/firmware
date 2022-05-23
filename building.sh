@@ -1,12 +1,13 @@
 #!/bin/bash
 #
-# OpenIPC.org | v.20220224
+# OpenIPC.org | v.20220515
 #
 
 MAX_KERNEL_SIZE=0x200000               #    2MiB,  2097152
+MAX_KERNEL_SIZE_ULTIMATE=0x300000      #    3MiB,  3145728
 MAX_KERNEL_SIZE_EXPERIMENTAL=0x3E8480  # ~3.9MiB,  4097152
 MAX_ROOTFS_SIZE=0x500000               #    5MiB,  5242880
-MAX_KERNEL_SIZE_ULTIMATE=0xC80000      # 12,5MiB, 13107200
+MAX_ROOTFS_SIZE_ULTIMATE=0xA00000      #   10MiB,  10485760
 
 clone() {
   sudo apt-get update -y ; apt-get install -y bc build-essential git unzip rsync autotools-dev automake libtool
@@ -32,10 +33,13 @@ should_fit() {
 }
 
 rename() {
-  should_fit uImage $MAX_KERNEL_SIZE
-  should_fit rootfs.squashfs $MAX_ROOTFS_SIZE
-  # If board have "_ultimate" as part...
-  # should_fit rootfs.squashfs $MAX_ROOTFS_SIZE_ULTIMATE
+  if grep -q ultimate_defconfig ./output/.config; then
+      should_fit uImage $MAX_KERNEL_SIZE_ULTIMATE
+      should_fit rootfs.squashfs $MAX_ROOTFS_SIZE_ULTIMATE
+  else
+      should_fit uImage $MAX_KERNEL_SIZE
+      should_fit rootfs.squashfs $MAX_ROOTFS_SIZE
+  fi
   mv -v ./output/images/uImage ./output/images/uImage.${soc}
   mv -v ./output/images/rootfs.squashfs ./output/images/rootfs.squashfs.${soc}
   mv -v ./output/images/rootfs.cpio ./output/images/rootfs.${soc}.cpio
@@ -160,6 +164,11 @@ gk7205v200() {
   fresh && make PLATFORM=goke BOARD=unknown_unknown_${soc}_openipc all && rename
 }
 
+gk7205v200_ultimate() {
+  soc="gk7205v200"
+  fresh && make PLATFORM=goke BOARD=unknown_unknown_${soc}_ultimate all && rename
+}
+
 gk7205v200_fpv() {
   soc="gk7205v200"
   fresh && make PLATFORM=goke BOARD=unknown_unknown_${soc}_fpv all && rename
@@ -178,6 +187,11 @@ gk7205v200_ufanet() {
 gk7205v300() {
   soc="gk7205v300"
   fresh && make PLATFORM=goke BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+gk7205v300_ultimate() {
+  soc="gk7205v300"
+  fresh && make PLATFORM=goke BOARD=unknown_unknown_${soc}_ultimate all && rename
 }
 
 gk7205v300_fpv() {
@@ -245,6 +259,11 @@ hi3516cv300() {
   fresh && make PLATFORM=hisilicon BOARD=unknown_unknown_${soc}_openipc all && rename
 }
 
+hi3516cv300_ultimate() {
+  soc="hi3516cv300"
+  fresh && make PLATFORM=hisilicon BOARD=unknown_unknown_${soc}_ultimate all && rename
+}
+
 hi3516ev100() {
   soc="hi3516ev100"
   fresh && make PLATFORM=hisilicon BOARD=unknown_unknown_${soc}_openipc all && rename
@@ -270,6 +289,11 @@ hi3519v101() {
 hi3516av200() {
   soc="hi3516av200"
   fresh && make PLATFORM=hisilicon BOARD=unknown_unknown_${soc}_openipc all && rename
+}
+
+hi3516av200_ultimate() {
+  soc="hi3516av200"
+  fresh && make PLATFORM=hisilicon BOARD=unknown_unknown_${soc}_ultimate all && rename
 }
 
 #################################################################################
@@ -314,6 +338,11 @@ hi3516ev200_eltis() {
 hi3516ev200_vixand() {
   soc="hi3516ev200"
   fresh && make PLATFORM=hisilicon BOARD=unknown_unknown_${soc}_vixand all && rename
+}
+
+hi3516ev200_ultimate() {
+  soc="hi3516ev200"
+  fresh && make PLATFORM=hisilicon BOARD=unknown_unknown_${soc}_ultimate all && rename
 }
 
 hi3516ev300() {
@@ -534,10 +563,12 @@ xm550() {
 #
 # gk7202v300                    # testing..
 # gk7205v200                    # OpenIPC
+# gk7205v200_ultimate           # OpenIPC_ultimate version
 # gk7205v200_fpv                # FPV
 # gk7205v200_iscom              # Iscom test
 # gk7205v200_ufanet             # Ufanet
 # gk7205v300                    # OpenIPC
+# gk7205v300_ultimate           # OpenIPC_ultimate version
 # gk7205v300_fpv                # FPV
 # gk7605v100                    # testing..
 #
@@ -558,6 +589,7 @@ hi3518ev200                   # testing..
 # hi3516dv100                   # OpenIPC
 #
 # hi3516cv300                   # OpenIPC
+# hi3516cv300_ultimate          # OpenIPC_ultimate version
 # hi3516ev100                   # OpenIPC
 #
 # hi3516dv200                   # OpenIPC
@@ -565,6 +597,7 @@ hi3518ev200                   # testing..
 # hi3516ev200_dozor             # Dozor
 # hi3516ev200_eltis             # Eltis
 # hi3516ev200_vixand            # Vixand
+# hi3516ev200_ultimate          # OpenIPC_ultimate version
 # hi3516ev300                   # OpenIPC
 # hi3516ev300_dev               # OpenIPC development
 # hi3516ev300_glibc             # testing..
@@ -574,6 +607,7 @@ hi3518ev200                   # testing..
 #
 # hi3519v101                    # OpenIPC
 # hi3516av200                   # OpenIPC
+hi3516av200_ultimate          # OpenIPC_ultimate version
 #
 # hi3516av300                   # testing..
 # hi3516cv500                   # testing..

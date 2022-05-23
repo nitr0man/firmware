@@ -287,8 +287,8 @@ insert_ko() {
     insmod hi3518_sys.ko
     insmod hiuser.ko
 
-    # insmod hi3518_tde.ko
-    # insmod hi3518_dsu.ko
+    insmod hi3518_tde.ko
+    insmod hi3518_dsu.ko
 
     insmod hi3518_viu.ko
     insmod hi3518_isp.ko
@@ -352,8 +352,8 @@ remove_ko() {
     rmmod -w hi3518_isp
     rmmod -w hi3518_viu
 
-    # rmmod -w hi3518_dsu
-    # rmmod -w hi3518_tde
+    rmmod -w hi3518_dsu
+    rmmod -w hi3518_tde
 
     rmmod -w hiuser
     rmmod -w hi3518_sys
@@ -408,8 +408,8 @@ else
         logger -s -p daemon.info -t hisilicon "Get data from environment and set SENSOR as ${SENSOR}"
     else
         insert_detect
-        SENSOR_DETECT=$(ipcinfo --short-sensor)
-        export SENSOR=${SENSOR_DETECT:=unknown}
+        SNS_TYPE=$(ipcinfo --short-sensor)
+        export SENSOR=${SNS_TYPE:=unknown}
         remove_detect
         logger -s -p daemon.info -t hisilicon "Get data from ipcinfo and set SENSOR as ${SENSOR}"
         fw_setenv sensor $SENSOR && logger -s -p daemon.info -t hisilicon "Write detected ${SENSOR} to U-Boot ENV"
